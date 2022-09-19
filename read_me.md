@@ -29,6 +29,10 @@ User interface/ Functions:
 9. a function to create a high score board and user input for their initials.
 10. A function that converts time played to points earned.
 
+Wireframe:
+
+![Screenshot_preview_wireframe](./Wireframe_screenshot.png)
+
 
 
 Schedule
