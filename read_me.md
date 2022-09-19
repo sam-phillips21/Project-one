@@ -33,7 +33,7 @@ Wireframe:
 
 ![Screenshot_preview_wireframe](./Wireframe_screenshot.png)
 
-
+![GameScreen_screenshot}](GameScreen_screenshot.png)
 
 Schedule
 
