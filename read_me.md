@@ -36,4 +36,18 @@ Schedule
 monday september 19th:
 
 do basic html and rough css.
-work on project... and sudo code.
+work on project... and sudo code. 
+Get approved for project.
+work with Ta's during office hours
+Tuesday: begin writing functions to create functionality of the game.
+work  with Ta's during office hours
+wednesday: keep working on functions
+work with Ta's during office hours
+
+thurday: assess progress and areas in which need improvement
+work with Ta's during office hours
+friday: have all questions answered and have a functioning program
+
+saturday/sunday: finish styling and debugging. Make sure game meets all requirements 
+
+sunday pm: submit project
