@@ -1,0 +1,86 @@
+#container {
+    max-width: 100em;
+    background-color: rgb(150, 195, 234);
+    margin: 0 auto;
+    text-align: center;
+    /* grid-gap: 2em;
+    grid-template-rows: .5fr, .5fr, .5fr;
+    grid-template-columns: .5fr, .5fr, .5fr;
+    grid-template-areas: "top-left top-right"
+                            "game"
+                            "btm-left btm-right"; */
+
+    border: 2px solid;
+}
+
+h1 {
+    font-size: 16px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h2 {
+    font-size: 14px;
+    
+    
+}
+
+#topLeft {
+
+    text-align: left;
+}
+
+#topRight {
+    text-align: right;
+}
+
+#btmLeft {
+
+    text-align: left;
+   
+}
+
+#btmRight {
+    text-align: right;
+}
+
+
+#lowerContainer {
+        max-width: 50em;
+        max-height: 5em;
+        background-color: rgb(150, 195, 234);
+        margin: 0 auto;
+        grid-gap: 2em;
+        grid-template-rows: .5fr, .5fr;
+        grid-template-columns: .5fr, .5fr;
+        grid-template-areas: "top-left top-right"
+                                "game"
+                                "btm-left btm-right";
+        border: 2px solid;
+
+}
+
+
+#gameBoard {
+        max-width: 100em;
+        max-height: 200em;
+       
+}
+canvas {
+
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+
+}
+
+main{
+    height: 500px;
+}
+
+#bottomContainer {
+
+    max-width: 100em;
+    background-color: rgb(150, 195, 234);
+    border: 2px solid;
+    margin-top: 5px;
+}
