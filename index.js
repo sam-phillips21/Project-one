@@ -25,6 +25,37 @@ const ctx = canvas.getContext('2d');
 // let mtneer  = ctx.fillStyle = "red" //make class, game loop fucntion, call methods of class in loop
 // ctx.fillRect(10, 65, 5, 5); //this is what we want to draw to do,
 // x = true
+
+// class of ice, x,y,width, height... fucntion to create varied ice. (if statement)live out side of class
+//pass arguments that get manipulated to create their properties. ex: top vs bottom and length.
+
+
+
+
+// class Ice { 
+//     constructor(x, y, color, width, height) {
+//         this.x = x,
+//         this.y = y,
+//         this.color = color,
+//         this.width = width,
+//         this. alive = false
+//         this.generateIce = {
+//             if ( this.x <= 260, this.y <= 0, this.width = 10, this.height <= 100)
+// const newCracks:new Ice(x, y, color, width, height)
+//             console.log(Ice)
+//             // if ( ice = 0, ice.x = 10 + ice.y <= 40)
+//             // if ( ice = 0, ice.width =1 0 + ice.height <= 40)
+            
+//         }
+
+//     }
+// }
+// newIce = { this.x && this.y && this.width && this.height }
+
+       
+//         console.log(newIce)
+//         let generateIce = newIce++
+
 const ice = [
     {
         x: 40,
@@ -103,11 +134,33 @@ const ice = [
         y: 100,
         width: 10,
         height: 75
-    }
+    },
+    {
+        x: 40,
+        y: 0,
+        width: 10,
+        height: 75,
+    },
+    {
+        x: 80,
+        y: 0,
+        width: 10,
+        height: 60,
+    }, 
+     {
+        x: 110,
+        y: 0,
+        width: 10,
+        height: 75,
+    },
+    {
+        x: 160,
+        y: 0,
+        width: 10,
+        height: 60,
+    },
     
  ]
-
-  
 // class iceField {
 //     constructor(x, y, width, height) {
 //         this.x = x,
@@ -120,67 +173,71 @@ const ice = [
 //         }
 //     }
 // }
-const mtneer = {
-    x: 10,
-    y: 65,
-}
-
-const drawMtneer = (mtneer) => {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(mtneer.x, mtneer.y, 5, 5);
-}
-
-// class newMtneer {
-//     constructor(x, y, color, width, height) {
-//         this.x = x,
-//         this.y = y,
-//         this.color = color,
-//         this.width = width,
-//         this.height = height,
-//         this.alive = true,
-//         this.speed = 15,
-//         this.direction = {
-//             up: false,
-//             down: false,
-//             left: false,
-//             right: false,
-//         },
-//         this.setDirection = function (key) {
-//             console.log('key was pressed', key)
-           
-        
-//     }
-// }
+// const mtneer = {
+//     x: 10,
+//     y: 65,
 // }
 
+// const drawMtneer = (mtneer) => {
+//     ctx.fillStyle = 'red';
+//     ctx.fillRect(mtneer.x, mtneer.y, 5, 5);
+// }
 
-const moveMtneer = () => {
-    document.addEventListener('keypress', (e) => {
-     if (['w', 'a', 's', 'd']) {
-      moveMtneer.setDirection(e.key)
-      if (key() == 'w') { this.direction.up = true }
-      if (key() == 'a') { this.direction.left = true }
-      if (key() == 's') { this.direction.down = true }
-      if (key() == 'd') { this.direction.right = true }
-    //   console.log(moveMtneer)
+class Mtneer {
+    constructor(x, y, color, width, height) {
+        this.x = x,
+        this.y = y,
+        this.color = color,
+        this.width = width,
+        this.height = height,
+        this.alive = true,
+        this.speed = 15,
+        this.direction = {
+            up: false,
+            down: false,
+            left: false,
+            right: false,
+        },
+        this.setDirection = function (key) {
+
+            if (['w', 'a', 's', 'd']) {
+                if (event.key == 'w') {this.direction.up = true}       
+            }
+        }, 
+        this.drawMtneer = () => {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
     }
+}
+const mtneerSam = new Mtneer(10, 65, 'red', 2, 2)
+    console.log(mtneerSam)
+
+const listenForKeysFunction = (character) => {
+        console.log('inception')
+        document.addEventListener('keydown', (event) => {
+        // console.log(event.key)
+        let keypress = event.key
+        if (keypress == 'w') { character.y -= 3 }
+        if (keypress == 'a') { character.x -= 3 }
+        if (keypress == 's') { character.y += 3 }
+        if (keypress == 'd') { character.x += 3 }
+        
   })
 }
 
-moveMtneer()
-
-        // console.log(moveMtneer)
-        // document.addEventListener('keypress', (event) => {
-        //     console.log(event)
-        // })
-
-
+listenForKeysFunction(mtneerSam)
 
 const drawIce = (ice) => {
    for (let i = 0; i < ice.length; i++) {
     ctx.fillStyle = 'lightblue';
     ctx.fillRect(ice[i].x, ice[i].y, ice[i].width, ice[i].height)
-    
+
+    // ice.forEach((obj) => {
+    //     let x = ice.length[i] + 2
+
+    // }
+    // drawIce(ice)
    }
     
 }
@@ -191,16 +248,38 @@ const moveLeft = (ice) => {
     })  
 }
 
+const collisionDetection = () => {
+   
+    ice.forEach((i) => {
+        if( mtneerSam.x < i.width + i.height
+            && mtneerSam.x + mtneerSam.width > i.x
+            && mtneerSam.y < i.y + i.height
+            && mtneerSam.y + mtneerSam.height > i.y) 
+                mtneer.alive = false 
+                // console.log('contact')
+    
+    })
+    
+}
+
 const gameLoop = () => {
     // console.log('this is running')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    drawMtneer(mtneer);
-    drawIce(ice);
+    // drawMtneer(mtneer);
+    drawIce(ice)
     moveLeft(ice)
+    mtneerSam.drawMtneer()
+    collisionDetection()
+    
     // mtneer.render()
     // mtneer.moveMtneer()
     
-
+// 
+}
+// idea is to make game loop stop if mtneer falls in the ice.
+const pauseGameLoop = () => {
+    if (mtneerSam.alive == false)
+    setTimeout(gameLoop)
 }
 
 setInterval(gameLoop,500) //16.6 60fps, 
