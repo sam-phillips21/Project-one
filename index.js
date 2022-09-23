@@ -167,10 +167,13 @@ const ice = [
 //         this.y = y,
 //         this.width = width,
 //         this.height = height,
-//         this.render = function () {
-//             ctx.fillStyle = this.color
-//             ctx.fillRect(this.x, this.y, this.width, this.height)
+//         
+//            
 //         }
+            // this.render = function () => {
+            // ctx.fillStyle = 'lightblue'
+//             ctx.fillRect(this.x, this.y, this.width, this.height)
+// }
 //     }
 // }
 // const mtneer = {
@@ -184,7 +187,7 @@ const ice = [
 // }
 
 class Mtneer {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, alive) {
         this.x = x,
         this.y = y,
         this.color = color,
@@ -210,7 +213,7 @@ class Mtneer {
         }
     }
 }
-const mtneerSam = new Mtneer(10, 65, 'red', 2, 2)
+const mtneerSam = new Mtneer(10, 65, 'red', 2, 2, true)
     console.log(mtneerSam)
 
 const listenForKeysFunction = (character) => {
@@ -254,8 +257,11 @@ const collisionDetection = () => {
         if( mtneerSam.x < i.width + i.height
             && mtneerSam.x + mtneerSam.width > i.x
             && mtneerSam.y < i.y + i.height
-            && mtneerSam.y + mtneerSam.height > i.y) 
-                mtneer.alive = false 
+            && mtneerSam.y + mtneerSam.height > i.y) {
+                mtneerSam.alive = false 
+                pauseGameLoop()
+            }
+                
                 // console.log('contact')
     
     })
@@ -280,6 +286,8 @@ const gameLoop = () => {
 const pauseGameLoop = () => {
     if (mtneerSam.alive == false)
     setTimeout(gameLoop)
+    ctx.font = "30px Arial";
+    ctx.strokeText("Hello World", 10, 50);
 }
 
 setInterval(gameLoop,500) //16.6 60fps, 
