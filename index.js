@@ -135,44 +135,26 @@ const ice = [
         width: 10,
         height: 75
     },
-    {
-        x: 40,
-        y: 0,
-        width: 10,
-        height: 75,
-    },
-    {
-        x: 80,
-        y: 0,
-        width: 10,
-        height: 60,
-    }, 
-     {
-        x: 110,
-        y: 0,
-        width: 10,
-        height: 75,
-    },
-    {
-        x: 160,
-        y: 0,
-        width: 10,
-        height: 60,
-    },
+
     
  ]
-// class iceField {
-//     constructor(x, y, width, height) {
-//         this.x = x,
-//         this.y = y,
-//         this.width = width,
-//         this.height = height,
-//         this.render = function () {
-//             ctx.fillStyle = this.color
-//             ctx.fillRect(this.x, this.y, this.width, this.height)
-//         }
-//     }
-// }
+class iceField { //
+    constructor(x, y, width, height) {
+        this.x = x,
+        this.y = y,
+        this.width = width,
+        this.height = height, 
+        
+            this.drawIce = () => {
+            ctx.fillStyle = 'lightblue'
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+         }
+         this.moveLeft = () => {
+            this.x = this.x -1 
+           // shift or unsift to remove from the array based on position when x becomes negative 
+         }
+    }  
+}
 // const mtneer = {
 //     x: 10,
 //     y: 65,
@@ -214,52 +196,74 @@ const mtneerSam = new Mtneer(10, 65, 'red', 2, 2, true)
     console.log(mtneerSam)
 
 const listenForKeysFunction = (character) => {
-        console.log('inception')
+        // console.log('inception')
         document.addEventListener('keydown', (event) => {
         // console.log(event.key)
         let keypress = event.key
         if (keypress == 'w') { character.y -= 3 }
         if (keypress == 'a') { character.x -= 3 }
         if (keypress == 's') { character.y += 3 }
-        if (keypress == 'd') { character.x += 3 }
-        
+        if (keypress == 'd') { character.x += 3 }   
   })
 }
-
 listenForKeysFunction(mtneerSam)
+let gameIce = []
+// makes new ice object and  pushes it into game ice
+//this allows us to dynamically edit the game ice pieces in play and in our game loop easily call all of the necessary class methods for our game. 
+//i may want to call this function a Lot. but i need game loop to do it in a way that makes sense. to accomplish this, i should consider adding a counter outside of the game loop that increments with every loop of the game that we can run checks against to generate ice.
+const generateIce = () => { //add params to create diffrent ice pieces for game loop
+    gameIce.push (new iceField (40, 0, 10, 75))
+    gameIce.push (new iceField (80, 0, 10, 60))
+    gameIce.push (new iceField (110, 0, 10, 75))
+    gameIce.push (new iceField (160, 0, 10, 60))
+    gameIce.push (new iceField (180, 0, 10, 75))
+    gameIce.push (new iceField (220, 0, 10, 75))
+    gameIce.push (new iceField (250, 0, 10, 90))
+    gameIce.push (new iceField (60, 0, 10, 75))
+    gameIce.push (new iceField (140, 50, 10, 75))
+    gameIce.push (new iceField (120, 80, 10, 75))
+    gameIce.push (new iceField (180, 100, 10, 50))
+    gameIce.push (new iceField (220, 100, 10, 75))
+    gameIce.push (new iceField (260, 0, 10, 75))
 
-const drawIce = (ice) => {
-   for (let i = 0; i < ice.length; i++) {
-    ctx.fillStyle = 'lightblue';
-    ctx.fillRect(ice[i].x, ice[i].y, ice[i].width, ice[i].height)
-
-    // ice.forEach((obj) => {
-    //     let x = ice.length[i] + 2
-
-    // }
-    // drawIce(ice)
-   }
     
+    
+
 }
 
+generateIce ()
+
+
+// new iceField (80, 0, 10, 60)
+//add arguments here
+//    for (let i = 0; i < ice.length; i++) {
+//     ctx.fillStyle = 'lightblue';
+//     ctx.fillRect(ice[i].x, ice[i].y, ice[i].width, ice[i].height)
+
+// }
+   
 const moveLeft = (ice) => {
     ice.forEach((i) => {
         i.x = i.x - 1
     })  
 }
 
-const collisionDetection = () => {
-   
-    ice.forEach((i) => {
+let collisionDetection = () => {
+   // run collision detection for each time mtneer sam moves. mtneer sam might draw himself each time he moves to avoid random collisions 
+    gameIce.forEach((i) => {
         if( mtneerSam.x < i.width + i.height
             && mtneerSam.x + mtneerSam.width > i.x
             && mtneerSam.y < i.y + i.height
             && mtneerSam.y + mtneerSam.height > i.y) {
                 mtneerSam.alive = false 
-                pauseGameLoop()
-            }
+                clearInterval(gameLoop)
                 
-                // console.log('contact')
+            }
+                if (collisionDetection = true )
+                    {console.log( 'contact') }
+                    
+                
+                
     
     })
     
@@ -269,8 +273,13 @@ const gameLoop = () => {
     // console.log('this is running')
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     // drawMtneer(mtneer);
-    drawIce(ice)
-    moveLeft(ice)
+    // {generateIce()}
+    // moveLeft(ice)
+    gameIce.forEach((hole) => {
+        hole.moveLeft() 
+        hole.drawIce()
+        hole.drawIce()
+    } )
     mtneerSam.drawMtneer()
     collisionDetection()
     
@@ -284,7 +293,7 @@ const pauseGameLoop = () => {
     if (mtneerSam.alive == false)
     setTimeout(gameLoop)
     ctx.font = "30px Arial";
-ctx.strokeText("Hello World", 10, 50);
+    ctx.strokeText("Hello World", 10, 50);
 }
 
 setInterval(gameLoop,500) //16.6 60fps, 
