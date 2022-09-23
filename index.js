@@ -167,13 +167,10 @@ const ice = [
 //         this.y = y,
 //         this.width = width,
 //         this.height = height,
-//         
-//            
-//         }
-            // this.render = function () => {
-            // ctx.fillStyle = 'lightblue'
+//         this.render = function () {
+//             ctx.fillStyle = this.color
 //             ctx.fillRect(this.x, this.y, this.width, this.height)
-// }
+//         }
 //     }
 // }
 // const mtneer = {
@@ -287,7 +284,7 @@ const pauseGameLoop = () => {
     if (mtneerSam.alive == false)
     setTimeout(gameLoop)
     ctx.font = "30px Arial";
-    ctx.strokeText("Hello World", 10, 50);
+ctx.strokeText("Hello World", 10, 50);
 }
 
 setInterval(gameLoop,500) //16.6 60fps, 
