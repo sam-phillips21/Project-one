@@ -193,8 +193,8 @@ const pauseGameLoop = () => {
     if (mtneerSam.alive == false)
     // setTimeout(gameLoop)
     clearInterval(gameInterval)
-    ctx.font = "20px Arial";
-    ctx.strokeText("you have fallen in the crack", 10, 50);
+    ctx.font = "10px Arial";
+    ctx.strokeText("you have fallen in the crack", 10, 30);
 }
 
 const gameInterval = setInterval(gameLoop,500) 
