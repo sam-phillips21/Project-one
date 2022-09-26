@@ -2,7 +2,6 @@
 //function moves player and allows mountianeer
 //function to generate cracks in play board
 //function for collision detection of player and crack in ice
-//function to remove a life if player falls in ice
 //step one: move player
 //step two: generate cracks
 //step three: loop cracks
@@ -179,9 +178,7 @@ const collisionDetection = () => {
                 mtneerSam.alive = false 
                 pauseGameLoop()
             }
-    
-    })
-    
+    })  
 }
 const gameLoop = () => {
     // console.log('this is running')
@@ -191,20 +188,19 @@ const gameLoop = () => {
     moveLeft(ice)
     mtneerSam.drawMtneer()
     collisionDetection()
-
 }
 const pauseGameLoop = () => {
     if (mtneerSam.alive == false)
-    setTimeout(gameLoop)
-    ctx.font = "30px Arial";
-    ctx.strokeText("you have fallen in the crack!", 10, 50);
+    // setTimeout(gameLoop)
+    clearInterval(gameInterval)
+    ctx.font = "20px Arial";
+    ctx.strokeText("you have fallen in the crack", 10, 50);
 }
 
-setInterval(gameLoop,500) //16.6 60fps, 
+const gameInterval = setInterval(gameLoop,500) 
 
+let btn = document.getElementById('btn')
+    document.addEventListener('DOMContentLoaded', btn)
+    btn.addEventListener('click', gameLoop) 
 
-let reset = ((pauseGameLoop) => {
-    resetButton()
-    })
-    document.addEventListener('DOMContentLoaded', resetButton)
-    resetBtn.addEventListener('click', reset)
+    
